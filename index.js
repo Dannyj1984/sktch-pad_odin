@@ -60,10 +60,13 @@ function clearGrid() {
 }
 
 function setupGrid(size) {
+    //set styles for grid container to repeat for columns and rows the number
+    //of times as per the size selected.
   grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`
   grid.style.gridTemplateRows = `repeat(${size}, 1fr)`
 
-  for (let i = 0; i < size * size; i++) {
+  //Create a number of new divs as per the size selected.
+  for (let i = 0; i < size * (size); i++) {
     const gridElement = document.createElement('div')
     gridElement.classList.add('grid-element')
     gridElement.addEventListener('mouseover', changeColor)
@@ -72,12 +75,14 @@ function setupGrid(size) {
   }
 }
 
+
 function changeColor(e) {
-  if (e.type === 'mouseover' && !mouseDown) return
+    //if rainbow is selected then calculate randowm colours
   if (currentMode === 'rainbow') {
     const randomR = Math.floor(Math.random() * 256)
     const randomG = Math.floor(Math.random() * 256)
     const randomB = Math.floor(Math.random() * 256)
+    //change the background colour of the relevant grid element
     e.target.style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB})`
   } else if (currentMode === 'color') {
     e.target.style.backgroundColor = currentColor
@@ -86,6 +91,7 @@ function changeColor(e) {
   }
 }
 
+//add active class to the button which is currently selected.
 function activateButton(newMode) {
   if (currentMode === 'rainbow') {
     rainbowBtn.classList.remove('active')
